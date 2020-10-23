@@ -15,4 +15,13 @@ of the Utterance Selection Model.
 """
 abstract type AbstractUtteranceSelector <: AbstractProbabilisticSpeaker end
 
+"""
+Abstract variational learner: subsumes all variational learner types.
+"""
+abstract type AbstractVariationalLearner <: AbstractProbabilisticSpeaker end
 
+"""
+Abstract one-dimensional variational learner: subsumes all 2-grammar
+(1-parameter) variational learners.
+"""
+abstract type AbstractOneDimVariationalLearner <: AbstractVariationalLearner end

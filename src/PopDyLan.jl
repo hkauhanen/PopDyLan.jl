@@ -23,10 +23,14 @@ include("ZipfTravellerCommunity.jl")
 
 # Grammar source code
 include("BinaryVariable.jl")
+include("PolyvalentVariable.jl")
 
 # Speaker source code
 include("EmptySpeaker.jl")
 include("MomentumSelector.jl")
+include("NeutralVariationalLearner.jl")
+include("Speakers.jl")
+include("VariationalLearner.jl")
 
 # Auxiliary source code
 include("auxiliaries.jl")
@@ -51,10 +55,14 @@ export weighted_degree_centrality
 # Exports (speakers)
 export EmptySpeaker
 export MomentumSelector
+export NeutralVariationalLearner
+export VariationalLearner
 export act!
+export speak
 
 # Exports (grammars)
 export BinaryVariable
+export PolyvalentVariable
 
 # Exports (auxiliaries)
 export characterize

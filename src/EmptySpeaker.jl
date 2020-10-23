@@ -1,6 +1,6 @@
 """
 An empty speaker. This is an empty type that doesn't have any functionality apart
-from 'existing'. It's use case is testing and debugging population-dynamic
+from 'existing'. Its use case is testing and debugging population-dynamic
 functions; linguistically, empty speakers are inert. They can be rendezvoused,
 technically, but nothing happens.
 """
