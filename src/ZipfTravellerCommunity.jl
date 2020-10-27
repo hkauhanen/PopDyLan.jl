@@ -152,11 +152,11 @@ end
 
 
 """
-    travel!(x::ZipfTravellerCommunity)
+    travel_all!(x::ZipfTravellerCommunity)
 
 Make every speaker in a Zipf traveller community travel.
 """
-function travel!(x::ZipfTravellerCommunity)
+function travel_all!(x::ZipfTravellerCommunity)
   for s in 1:length(x.census)
     travel!(s, x)
   end
@@ -164,9 +164,19 @@ end
 
 
 """
+    travel!(x::ZipfTravellerCommunity)
+
+Make a random speaker in a Zipf traveller community travel.
+"""
+function travel!(x::ZipfTravellerCommunity)
+  travel!(rand(1:length(x.census)), x)
+end
+
+
+"""
     rendezvous!(x::ZipfTravellerCommunity)
 
-Rendezevous in a Zipf traveller community (between two random speakers
+Rendezvous in a Zipf traveller community (between two random speakers
 currently in the same cell.
 """
 function rendezvous!(x::ZipfTravellerCommunity)

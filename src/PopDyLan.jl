@@ -50,6 +50,7 @@ export eject!
 export inject!
 export rendezvous!
 export travel!
+export travel_all!
 export weighted_degree_centrality
 
 # Exports (speakers)
