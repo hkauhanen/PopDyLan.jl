@@ -27,7 +27,8 @@ and initial frequency `x0`.
 """
 function MomentumSelector(alpha::Float64, gamma::Float64, b::Float64, T::Int, x0::Float64)
   tmmax = log(alpha/gamma)/(alpha - gamma)
-  mmax = exp(-gamma*tmmax) - exp(-alpha*tmmax)
+  #mmax = exp(-gamma*tmmax) - exp(-alpha*tmmax)
+  mmax = exp(-alpha*tmmax) - exp(-gamma*tmmax)
   MomentumSelector(BinaryVariable(x0), BinaryVariable(x0), alpha, gamma, b, T, mmax)
 end
 
