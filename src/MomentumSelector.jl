@@ -17,6 +17,7 @@ mutable struct MomentumSelector <: AbstractUtteranceSelector
   mmax::Float64
 end
 
+
 """
     MomentumSelector(alpha::Float64, gamma::Float64, b::Float64, T::Int, x0::Float64)
 
@@ -30,22 +31,29 @@ function MomentumSelector(alpha::Float64, gamma::Float64, b::Float64, T::Int, x0
   MomentumSelector(BinaryVariable(x0), BinaryVariable(x0), alpha, gamma, b, T, mmax)
 end
 
+
 """
     act!(x::MomentumSelector, y::MomentumSelector)
 
 Let one `MomentumSelector` act upon another, i.e. `x` speaks and `y` listens.
 """
 function act!(x::MomentumSelector, y::MomentumSelector)
+  println("yay")
   normalized_momentum = (y.gamma_grammar.x - y.grammar.x)/y.mmax
   observed_frequency = rand(Distributions.Binomial(x.T, x.grammar.x))/x.T
-  
+
   transformed_frequency = 0.0
+  
   if observed_frequency == 1.0
     transformed_frequency = 1.0
-  elseif observed_frequency == 0.0
-    transformed_frequency = 0.0
-  else
+  elseif observed_frequency != 0.0
     transformed_frequency = observed_frequency + y.b*normalized_momentum
+  end
+
+  if transformed_frequency > 1.0
+    transformed_frequency = 1.0
+  elseif transformed_frequency < 0.0
+    transformed_frequency = 0.0
   end
 
   y.grammar.x = y.alpha*transformed_frequency + (1-y.alpha)*y.grammar.x
