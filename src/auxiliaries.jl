@@ -46,3 +46,34 @@ function characterize(x::MomentumSelector)
 end
 
 
+"""
+    characterize_momentum(x::MomentumSelector)
+
+Characterize the normalized momentum term of a `MomentumSelector`.
+"""
+function characterize_momentum(x::MomentumSelector)
+  (x.gamma_grammar.x - x.grammar.x)/x.mmax
+end
+
+
+"""
+    characterize_momentum_bylocation(x::AbstractDiscretePlanarCommunity)
+
+Return the average normalized momentum by location in a lattice community.
+"""
+function characterize_momentum_bylocation(x::AbstractDiscretePlanarCommunity)
+  out = zeros(x.size, x.size)
+  speakers_bycell = zeros(x.size, x.size)
+
+  for s in 1:length(x.census)
+    speaker = x.census[s]
+    sx = x.coordinates[s].x
+    sy = x.coordinates[s].y
+    out[sx, sy] += characterize_momentum(speaker)
+    speakers_bycell[sx, sy] += 1
+  end
+
+  out ./ speakers_bycell
+end
+
+

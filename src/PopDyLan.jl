@@ -68,5 +68,7 @@ export PolyvalentVariable
 # Exports (auxiliaries)
 export characterize
 export characterize_bylocation
+export characterize_momentum
+export characterize_momentum_bylocation
 
 end # module
