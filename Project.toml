@@ -1,7 +1,7 @@
 name = "PopDyLan"
 uuid = "f3004b43-6d24-4117-9542-330a26d4f543"
 authors = ["hkauhanen <mail@henr.in>"]
-version = "0.0.2"
+version = "0.0.3"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
