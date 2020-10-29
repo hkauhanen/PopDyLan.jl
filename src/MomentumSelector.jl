@@ -38,7 +38,6 @@ end
 Let one `MomentumSelector` act upon another, i.e. `x` speaks and `y` listens.
 """
 function act!(x::MomentumSelector, y::MomentumSelector)
-  println("yay")
   normalized_momentum = (y.gamma_grammar.x - y.grammar.x)/y.mmax
   observed_frequency = rand(Distributions.Binomial(x.T, x.grammar.x))/x.T
 
