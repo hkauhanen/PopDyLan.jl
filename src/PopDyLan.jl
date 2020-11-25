@@ -6,6 +6,9 @@ import LightGraphs
 import Random
 import SimpleWeightedGraphs
 
+# Initialize random number generators
+const mts = MersenneTwister.(1:Threads.nthreads())
+
 # Abstract type definitions
 include("AbstractCommunities.jl")
 include("AbstractGrammars.jl")

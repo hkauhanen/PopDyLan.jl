@@ -37,8 +37,8 @@ function rendezvous!(x::AbstractCommunity)
   int1 = 0
   int2 = 0
   while true
-    int1 = rand(1:length(x.census))
-    int2 = rand(1:length(x.census))
+    int1 = rand(MTS[Threads.threadid()], 1:length(x.census))
+    int2 = rand(MTS[Threads.threadid()], 1:length(x.census))
     int1 != int2 && break
   end
   rendezvous!(x, int1, int2)
@@ -55,7 +55,7 @@ Insert a speaker into a Zipfian lattice community.
 function inject!(x::AbstractSpeaker, y::AbstractZipfLatticeCommunity)
   no_speakers = length(y.census)
   push!(y.census, x)
-  push!(y.coordinates, Point{Int}(rand(1:y.size), rand(1:y.size)))
+  push!(y.coordinates, Point{Int}(rand(MTS[Threads.threadid()], 1:y.size), rand(MTS[Threads.threadid()], 1:y.size)))
   if no_speakers > 1
     for z in 1:(no_speakers - 1)
       dist = y.distance(y.coordinates[end], y.coordinates[z])
@@ -119,10 +119,10 @@ Conduct a pairwise rendezvous between random speakers in a Zipfian lattice commu
 """
 function rendezvous!(x::AbstractZipfLatticeCommunity)
   # Select one speaker at random
-  int1 = rand(1:length(x.census))
+  int1 = rand(MTS[Threads.threadid()], 1:length(x.census))
 
   # Select interaction distance at random
-  dist = Distributions.wsample(x.possible_distances, x.probabilities)
+  dist = Distributions.wsample(MTS[Threads.threadid()], x.possible_distances, x.probabilities)
 
   # Check if speaker has any neighbours at this distance
   haskey(x.lookup, (int1, dist)) || return false
@@ -130,7 +130,7 @@ function rendezvous!(x::AbstractZipfLatticeCommunity)
   # If so, choose one of them uniformly at random
   potentials = x.lookup[(int1, dist)]
   length(potentials) > 0 || return false
-  int2 = rand(potentials)
+  int2 = rand(MTS[Threads.threadid()], potentials)
 
   # Act both ways
   act!(x.census[int1], x.census[int2])
@@ -147,10 +147,10 @@ in a Zipfian lattice community.
 """
 function rendezvous!(x::AbstractZipfLatticeCommunity, T::Int)
   # Select one speaker at random
-  int1 = rand(1:length(x.census))
+  int1 = rand(MTS[Threads.threadid()], 1:length(x.census))
 
   # Select interaction distance at random
-  dist = Distributions.wsample(x.possible_distances, x.probabilities)
+  dist = Distributions.wsample(MTS[Threads.threadid()], x.possible_distances, x.probabilities)
 
   # Check if speaker has any neighbours at this distance
   haskey(x.lookup, (int1, dist)) || return false
@@ -158,7 +158,7 @@ function rendezvous!(x::AbstractZipfLatticeCommunity, T::Int)
   # If so, choose one of them uniformly at random
   potentials = x.lookup[(int1, dist)]
   length(potentials) > 0 || return false
-  int2 = rand(potentials)
+  int2 = rand(MTS[Threads.threadid()], potentials)
 
   # Act both ways
   for i in 1:T
