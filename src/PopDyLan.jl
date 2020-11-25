@@ -7,7 +7,7 @@ import Random
 import SimpleWeightedGraphs
 
 # Initialize random number generators
-const mts = MersenneTwister.(1:Threads.nthreads())
+const MTS = Random.MersenneTwister.(1:Threads.nthreads())
 
 # Abstract type definitions
 include("AbstractCommunities.jl")
