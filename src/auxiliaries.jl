@@ -25,8 +25,8 @@ function characterize_bylocation(x::AbstractDiscretePlanarCommunity)
 
   for s in 1:length(x.census)
     speaker = x.census[s]
-    sx = x.coordinates[s].x
-    sy = x.coordinates[s].y
+    sx = x.locations[s].x
+    sy = x.locations[s].y
     out[sx, sy] += characterize(speaker)
     speakers_bycell[sx, sy] += 1
   end
@@ -67,8 +67,8 @@ function characterize_momentum_bylocation(x::AbstractDiscretePlanarCommunity)
 
   for s in 1:length(x.census)
     speaker = x.census[s]
-    sx = x.coordinates[s].x
-    sy = x.coordinates[s].y
+    sx = x.locations[s].x
+    sy = x.locations[s].y
     out[sx, sy] += characterize_momentum(speaker)
     speakers_bycell[sx, sy] += 1
   end
