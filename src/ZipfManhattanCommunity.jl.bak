@@ -11,9 +11,9 @@ P(x,y) = P(y,x) \\propto \\frac{1}{(1 + d(x,y))^\\lambda}
 where ``d(x,y)`` is their Manhattan distance on the lattice and ``\\lambda`` 
 is a decay exponent.
 """
-mutable struct ZipfManhattanCommunity{T<:AbstractSpeaker} <: AbstractZipfLatticeCommunity
+mutable struct ZipfManhattanCommunity <: AbstractZipfLatticeCommunity
   # Speaker census, as usual for all Communities
-  census::Array{T}
+  census::Array{AbstractSpeaker}
 
   # Coordinates of each speaker
   coordinates::Array{Point{Int}}
@@ -51,7 +51,7 @@ end
 
 Construct a Zipf–Manhattan community of size `K` by `K`, with decay exponent `lambda`.
 """
-function ZipfManhattanCommunity{T}(K::Int, lambda::Float64) where {T<:AbstractSpeaker}
-  ZipfManhattanCommunity(Array{T}(undef, 0), Array{Point{Int}}(undef, 0), Dict{Tuple{Int,Int}, Array{Int}}(), K, lambda, zipf(2*(K-1) + 1, lambda), manhattan, collect(0:2*(K-1)), 0)
+function ZipfManhattanCommunity(K::Int, lambda::Float64)
+  ZipfManhattanCommunity(Array{AbstractSpeaker}(undef, 0), Array{Point{Int}}(undef, 0), Dict{Tuple{Int,Int}, Array{Int}}(), K, lambda, zipf(2*(K-1) + 1, lambda), manhattan, collect(0:2*(K-1)), 0)
 end
 
