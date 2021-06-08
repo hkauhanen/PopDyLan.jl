@@ -55,7 +55,7 @@ end
 Construct a Zipf traveller community of size `K` by `K` with scaling
 parameter `lambda`.
 """
-function ZipfTravellerCommunity(K::Int, lambda::Float64)
+function ZipfTravellerCommunity{T}(K::Int, lambda::Float64) where {T<:AbstractSpeaker}
   # Possible distances on lattice
   possdist = collect(0:2*(K-1))
 
@@ -93,7 +93,7 @@ function ZipfTravellerCommunity(K::Int, lambda::Float64)
   end
 
   # Construct
-  ZipfTravellerCommunity(Array{AbstractSpeaker}(undef, 0), spatcens, Array{Point{Int}}(undef, 0), Array{Point{Int}}(undef, 0), K, lambda, zipf(2*(K-1) + 1, lambda), manhattan, possdistcell, 0, lup)
+  ZipfTravellerCommunity(Array{T}(undef, 0), spatcens, Array{Point{Int}}(undef, 0), Array{Point{Int}}(undef, 0), K, lambda, zipf(2*(K-1) + 1, lambda), manhattan, possdistcell, 0, lup)
 end
 
 
