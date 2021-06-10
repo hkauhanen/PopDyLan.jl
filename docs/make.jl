@@ -7,7 +7,7 @@ makedocs(
     modules = [PopDyLan],
     pages = [
              "Home" => "index.md",
-             "Getting started" => "underconstruction.md",
+             "Getting started" => "quickguide.md",
              "Philosophy" => "philosophy.md",
              "Examples" => "underconstruction.md",
              #"Reference" => "reference.md"
